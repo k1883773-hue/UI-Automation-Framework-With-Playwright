@@ -13,7 +13,6 @@ export class CartPO {
 
   async isCartEmpty() {
     const count = await this.page.locator(cartItems).count();
-    // Logger.step(`Cart items count: ${count}`);
     return count === 0;
   }
 
@@ -28,11 +27,9 @@ export class CartPO {
   async clearCart() {
     const count = await this.page.locator(removeButtons).count();
 
-    // Logger.step(`Removing ${count} products from cart`);
-
     for (let i = 0; i < count; i++) {
       await this.page.locator(removeButtons).first().click();
-      await this.page.waitForTimeout(500); // can replace with better wait later
+      // await this.page.waitForTimeout(500); 
     }
   }
 
@@ -42,7 +39,6 @@ export class CartPO {
   }
 
   async clickProceedToCheckout() {
-    // Logger.step('Clicking Proceed To Checkout');
     await this.page.locator(proceedToCheckoutBtn).click();
   }
 
@@ -58,8 +54,6 @@ export class CartPO {
       quantity: quantities[index]?.trim(),
       total: totals[index]?.trim()
     }));
-
-    // Logger.step(`Cart Details: ${JSON.stringify(cartData)}`);
 
     return cartData;
   }

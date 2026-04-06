@@ -30,9 +30,7 @@ export class SignupPO {
     this.page = page;
   }
 
-  async navigateToSignup() {
-    await this.page.locator(signupLink).click();
-  }
+ 
 
   async enterSignupName(name) {
     await this.page.locator(signupNameInput).fill(name);

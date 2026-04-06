@@ -28,7 +28,7 @@ test.describe('Product Selection Tests', () => {
     const randomIndex = await homePage.getRandomProductIndex();
     const expectedProductName = await homePage.getProductNameByIndex(randomIndex);
     Logger.step(`Selected Product: ${expectedProductName}`);
-    await homePage.clickProductByIndex(randomIndex);
+    await homePage.clickOnProductByIndex(randomIndex);
     Logger.step('Verifying product detail page');
     const actualProductName = await productPage.getProductDetailName();
     expect(actualProductName.trim()).toContain(expectedProductName.trim());

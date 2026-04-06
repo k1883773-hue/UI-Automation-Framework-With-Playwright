@@ -28,7 +28,7 @@ test.describe('Add To Cart Tests', () => {
         await page.goto(config.url.local);
 
         Logger.step('Clicking on Login Link');
-        await homePage.navigateToLogin();
+        await homePage.navigateToLoginSignUp();
 
     });
 

@@ -12,6 +12,7 @@ const productDetailLinks = 'a[href*="/product_details/"]';
 const productNames = '.features_items .productinfo p';
 const productPrice = '.features_items .productinfo h2';
 const cartLink = 'a[href="/view_cart"]';
+const deleteAccountLink = 'a[href="/delete_account"]';
 
 export class HomePagePO {
 
@@ -19,10 +20,13 @@ export class HomePagePO {
     this.page = page;
   }
 
-  async navigateToLogin() {
+  async navigateToLoginSignUp() {
     await this.page.locator(loginLink).click();
   }
 
+   async navigateToSignup() {
+    await this.page.locator(signupLink).click();
+  }
   async navigateToProducts() {
     await this.page.locator(productsMenu).click();
   }
@@ -31,13 +35,13 @@ export class HomePagePO {
     await this.page.locator(searchInput).fill(productName);
   }
 
-  async clickSearch() {
+  async clickOnSearch() {
     await this.page.locator(searchButton).click();
   }
 
   async searchProduct(productName) {
     await this.enterSearchProduct(productName);
-    await this.clickSearch();
+    await this.clickOnSearch();
   }
 
   async getSearchedProductTitle() {
@@ -56,7 +60,7 @@ export class HomePagePO {
     return await this.page.locator(loggedInText).textContent();
   }
 
-  async clickLogout() {
+  async clickOnLogout() {
     await this.page.locator(logoutLink).click();
   }
 
@@ -69,11 +73,11 @@ export class HomePagePO {
     return await this.page.locator('text=Logged in as').textContent();
   }
 
-  async clickContinueShopping() {
+  async clickOnContinueShopping() {
     await this.page.locator(continueShoppingButton).click();
   }
 
-  async clickProductByIndex(index) {
+  async clickOnProductByIndex(index) {
     await this.page.locator(productDetailLinks).nth(index).click();
   }
 
@@ -94,12 +98,17 @@ export class HomePagePO {
     const index = await this.getRandomProductIndex();
     const name = await this.getProductNameByIndex(index);
 
-    await this.clickProductByIndex(index);
+    await this.clickOnProductByIndex(index);
 
     return name;
   }
 
- async navigateToCartPage() {
-  await this.page.locator('header a[href="/view_cart"]').click();
-}
+  async navigateToCartPage() {
+    await this.page.locator('header a[href="/view_cart"]').click();
+  }
+
+  async clickOnDeleteAccount() {
+    await this.page.locator(deleteAccountLink).click();
+  }
+
 }

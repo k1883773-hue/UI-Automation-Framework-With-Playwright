@@ -16,7 +16,7 @@ test.describe('Logout Tests', () => {
     await page.goto(config.url.local);
 
     Logger.step('Navigating to login page');
-    await homePage.navigateToLogin();
+    await homePage.navigateToLoginSignUp();
 
     Logger.step('Logging in with valid credentials');
     await loginPage.loginToApplication('test0808@yopmail.com', 'Test@123'); 
@@ -27,7 +27,7 @@ test.describe('Logout Tests', () => {
     expect(await homePage.getLoggedInText()).toContain('Logged in as');
 
     Logger.step('Clicking logout');
-    await homePage.clickLogout();
+    await homePage.clickOnLogout();
 
     Logger.step('Verifying user is logged out');
     expect(await homePage.isLoggedOut()).toBe(true);

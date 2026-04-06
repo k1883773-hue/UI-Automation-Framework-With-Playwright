@@ -30,7 +30,7 @@ test.describe('Add To Cart Tests', () => {
     Logger.step('Adding product to cart');
     await productPage.clickAddToCart();
     Logger.step('Navigating to cart');
-    await homePage.clickViewCart();
+    await homePage.navigateToCartPage();
     Logger.step('Verifying product in cart');
     const cartProducts = await productPage.getCartProducts();
     cartProducts.forEach(product => {

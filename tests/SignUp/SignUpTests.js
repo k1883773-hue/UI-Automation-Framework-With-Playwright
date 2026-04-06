@@ -1,22 +1,25 @@
 import { test, expect } from '@playwright/test';
 import { SignupData } from '../../dataFactory/SignUpData/SignUpData.js';
 import { SignupPO } from '../../pageObject/SignUpPO.js';
+import { HomePagePO } from '../../pageObject/HomePagePO.js';  
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
 test.describe('Signup Tests', () => {
 
   let signUpPage;
+  let homePage;
 
   test.beforeEach(async ({ page }) => {
 
     signUpPage = new SignupPO(page);
+    homePage = new HomePagePO(page);
 
     Logger.step('Navigating to application');
     await page.goto(config.url.local);
 
     Logger.step('Clicking on Signup Link');
-    await signUpPage.navigateToSignup();
+    await homePage.navigateToLoginSignUp();
   });
 
   test('Verify user signup with valid credentials', async () => {
@@ -29,7 +32,6 @@ test.describe('Signup Tests', () => {
     Logger.step('Verifying successful signup');
     expect(await signUpPage.getSuccessMessage()).toContain('Account Created!');
   });
-
 
   test('Verify error message for existing email signup', async () => {
     const signUpData = SignupData.createSignupWithExistingEmail();
