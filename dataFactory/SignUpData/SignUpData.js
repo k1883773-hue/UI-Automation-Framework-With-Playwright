@@ -27,8 +27,7 @@ export class SignupData {
   static createSignupWithExistingEmail() {
 
     const signup = this.createValidSignupData();
-    // override email with a fixed existing email
-    signup.setEmail('test0808@yopmail.com');
+    signup.setEmail('test0808@yopmail.com'); // override email with an existing email
 
     return signup;
 }

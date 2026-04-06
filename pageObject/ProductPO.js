@@ -1,8 +1,8 @@
 const addToCartButton = 'button[type="button"]';
-const continueShoppingButton = 'button:has-text("Continue Shopping")';
-const viewCartLink = 'text=View Cart';
 const cartProductNames = '.cart_item .product-name';
 const cartProductPrices = '.cart_item .product-price';
+const productItems = '.features_items .product-image-wrapper';
+const productDetailName = '.product-information h2';
 
 export class ProductPO {
 
@@ -14,33 +14,12 @@ export class ProductPO {
     await this.page.locator('a[href="/products"]').click();
   }
 
-  async getRandomProductIndex() {
-    const count = await this.page.locator('.features_items .product-image-wrapper').count();
-    return Math.floor(Math.random() * count);
-  }
-
-  async getProductNameByIndex(index) {
-    return await this.page.locator('.features_items .productinfo p').nth(index).textContent();
-  }
-
-  async clickProductByIndex(index) {
-    await this.page.locator('a[href*="/product_details/"]').nth(index).click();
-  }
-
   async getProductDetailName() {
-    return await this.page.locator('.product-information h2').textContent();
+    return await this.page.locator(productDetailName).textContent();
   }
 
   async clickAddToCart() {
     await this.page.locator(addToCartButton).click();
-  }
-
-  async clickContinueShopping() {
-    await this.page.locator(continueShoppingButton).click();
-  }
-
-  async clickViewCart() {
-    await this.page.locator(viewCartLink).click();
   }
 
   async getCartProducts() {
@@ -55,12 +34,5 @@ export class ProductPO {
     return products;
   }
 
-  async selectRandomProductAndOpen() {
-    const index = await this.getRandomProductIndex();
-    const name = await this.getProductNameByIndex(index);
-
-    await this.clickProductByIndex(index);
-
-    return name;
-  }
+ 
 }

@@ -20,6 +20,7 @@ test.describe('Login Tests', () => {
 
     Logger.step('Clicking on Login Link');
     await homePage.navigateToLogin();
+
   });
 
   test('Verify user login with valid credentials', async () => {

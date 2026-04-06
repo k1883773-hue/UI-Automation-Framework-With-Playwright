@@ -1,12 +1,18 @@
+const loginLink = 'text= Signup / Login';
+const loggedInText = 'text=Logged in as';
+const logoutLink = 'text= Logout';
 const productsMenu = 'a[href="/products"]';
 const searchInput = '#search_product';
 const searchButton = '#submit_search';
 const searchedProductsTitle = '.title.text-center';
 const productList = '.features_items .product-image-wrapper';
 const noResultsMessage = 'text=No products found';
-const logoutLink = 'text= Logout';
-const loggedInText = 'text=Logged in as';
-const loginLink = 'text= Signup / Login';
+const continueShoppingButton = 'button:has-text("Continue Shopping")';
+const viewCartLink = 'text=View Cart';
+const productDetailLinks = 'a[href*="/product_details/"]';
+const productNames = '.features_items .productinfo p';
+const productPrice = '.features_items .productinfo h2';
+const cartLink = 'a[href="/view_cart"]';
 
 export class HomePagePO {
 
@@ -14,7 +20,7 @@ export class HomePagePO {
     this.page = page;
   }
 
-   async navigateToLogin() {
+  async navigateToLogin() {
     await this.page.locator(loginLink).click();
   }
 
@@ -60,7 +66,46 @@ export class HomePagePO {
     return signupLoginVisible;
   }
 
-   async getLoggedInText() {
+  async getLoggedInText() {
     return await this.page.locator('text=Logged in as').textContent();
   }
+
+  async clickContinueShopping() {
+    await this.page.locator(continueShoppingButton).click();
+  }
+
+  async clickViewCart() {
+    await this.page.locator(viewCartLink).click();
+  }
+  async clickProductByIndex(index) {
+    await this.page.locator(productDetailLinks).nth(index).click();
+  }
+
+  async getProductNameByIndex(index) {
+    return await this.page.locator(productNames).nth(index).textContent();
+  }
+
+  async getProductPriceByIndex(index) {
+    return await this.page.locator(productPrice).nth(index).textContent();
+  }
+
+    async getRandomProductIndex() {
+    const count = await this.page.locator(productList).count();
+    return Math.floor(Math.random() * count);
+  }
+
+   async selectRandomProductAndOpen() {
+    const index = await this.getRandomProductIndex();
+    const name = await this.getProductNameByIndex(index);
+
+    await this.clickProductByIndex(index);
+
+    return name;
+  }
+
+   async navigateToCartPage() {
+    await this.page.locator(cartLink).click();
+  }
+
+
 }
