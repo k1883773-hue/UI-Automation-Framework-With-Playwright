@@ -4,9 +4,9 @@ export class LoginData {
 
     getValidData() {
         const loginData = new Login();
-        loginData.email = "test0808@yopmail.com",
-            loginData.password = "Test@123";
-            return loginData;
+        loginData.email = "test0808@yopmail.com";
+        loginData.password = "Test@123";
+        return loginData;
     }
 
     getInvalidData() {

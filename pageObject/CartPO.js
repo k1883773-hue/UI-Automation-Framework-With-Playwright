@@ -13,7 +13,7 @@ export class CartPO {
 
   async isCartEmpty() {
     const count = await this.page.locator(cartItems).count();
-    Logger.step(`Cart items count: ${count}`);
+    // Logger.step(`Cart items count: ${count}`);
     return count === 0;
   }
 
@@ -28,7 +28,7 @@ export class CartPO {
   async clearCart() {
     const count = await this.page.locator(removeButtons).count();
 
-    Logger.step(`Removing ${count} products from cart`);
+    // Logger.step(`Removing ${count} products from cart`);
 
     for (let i = 0; i < count; i++) {
       await this.page.locator(removeButtons).first().click();
@@ -42,7 +42,7 @@ export class CartPO {
   }
 
   async clickProceedToCheckout() {
-    Logger.step('Clicking Proceed To Checkout');
+    // Logger.step('Clicking Proceed To Checkout');
     await this.page.locator(proceedToCheckoutBtn).click();
   }
 
@@ -59,7 +59,7 @@ export class CartPO {
       total: totals[index]?.trim()
     }));
 
-    Logger.step(`Cart Details: ${JSON.stringify(cartData)}`);
+    // Logger.step(`Cart Details: ${JSON.stringify(cartData)}`);
 
     return cartData;
   }

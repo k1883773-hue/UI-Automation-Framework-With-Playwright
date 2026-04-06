@@ -8,7 +8,6 @@ const searchedProductsTitle = '.title.text-center';
 const productList = '.features_items .product-image-wrapper';
 const noResultsMessage = 'text=No products found';
 const continueShoppingButton = 'button:has-text("Continue Shopping")';
-const viewCartLink = 'text=View Cart';
 const productDetailLinks = 'a[href*="/product_details/"]';
 const productNames = '.features_items .productinfo p';
 const productPrice = '.features_items .productinfo h2';
@@ -74,9 +73,6 @@ export class HomePagePO {
     await this.page.locator(continueShoppingButton).click();
   }
 
-  async clickViewCart() {
-    await this.page.locator(viewCartLink).click();
-  }
   async clickProductByIndex(index) {
     await this.page.locator(productDetailLinks).nth(index).click();
   }
@@ -89,12 +85,12 @@ export class HomePagePO {
     return await this.page.locator(productPrice).nth(index).textContent();
   }
 
-    async getRandomProductIndex() {
+  async getRandomProductIndex() {
     const count = await this.page.locator(productList).count();
     return Math.floor(Math.random() * count);
   }
 
-   async selectRandomProductAndOpen() {
+  async selectRandomProductAndOpen() {
     const index = await this.getRandomProductIndex();
     const name = await this.getProductNameByIndex(index);
 
@@ -103,9 +99,7 @@ export class HomePagePO {
     return name;
   }
 
-   async navigateToCartPage() {
-    await this.page.locator(cartLink).click();
-  }
-
-
+ async navigateToCartPage() {
+  await this.page.locator('header a[href="/view_cart"]').click();
+}
 }

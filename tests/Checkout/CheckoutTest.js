@@ -4,6 +4,7 @@ import { HomePagePO } from '../../pageObject/HomePagePO.js';
 import { ProductPO } from '../../pageObject/ProductPO.js';
 import { CartPO } from '../../pageObject/CartPO.js';
 import { CheckoutPO } from '../../pageObject/CheckoutPO.js';
+import { LoginData } from '../../dataFactory/LoginData/LoginData.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
@@ -26,16 +27,22 @@ test.describe('Add To Cart Tests', () => {
         Logger.step('Navigating to application');
         await page.goto(config.url.local);
 
-        Logger.step('Logging into application');
+        Logger.step('Clicking on Login Link');
         await homePage.navigateToLogin();
-        await loginPage.loginToApplication('test0808@yopmail.com', 'Test@123');
 
     });
 
     test('Verify complete checkout flow', async () => {
 
+        const loginData = new LoginData().getValidData();
+
+        Logger.step('Enter valid credentials and submit');
+        await loginPage.loginToApplication(loginData.email, loginData.password);
+        Logger.step('Verifying successful login');
+        expect(await homePage.getLoggedInText()).toContain('Logged in as');
+
         Logger.step('Navigating to cart');
-        await homePage.clickViewCart();
+        await homePage.navigateToCartPage();
 
         Logger.step('Checking if cart is empty');
         const isEmpty = await cartPage.isCartEmpty();

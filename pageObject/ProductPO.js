@@ -33,6 +33,4 @@ export class ProductPO {
 
     return products;
   }
-
- 
 }
