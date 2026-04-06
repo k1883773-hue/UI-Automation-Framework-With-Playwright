@@ -9,7 +9,6 @@ export class LoginPO {
     this.page = page;
   }
 
-  
   async enterEmail(email) {
     await this.page.locator(emailTextBox).fill(email);
   }

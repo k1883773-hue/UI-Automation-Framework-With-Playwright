@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { SignupData } from '../../dataFactory/signUpData/signUpData.js';
+import { SignupData } from '../../dataFactory/SignUpData/SignUpData.js';
 import { SignupPO } from '../../pageObject/SignUpPO.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
