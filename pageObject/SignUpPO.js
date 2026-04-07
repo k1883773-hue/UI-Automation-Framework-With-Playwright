@@ -75,4 +75,8 @@ export class SignupPO {
     return await this.page.locator(errorMessageLabel).textContent();
   }
 
+  async getEmailRequiredMessage() {
+    return await this.page.locator(signupNameInput).evaluate(el => el.validationMessage);
+  }
+
 }

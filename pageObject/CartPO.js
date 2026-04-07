@@ -29,7 +29,6 @@ export class CartPO {
 
     for (let i = 0; i < count; i++) {
       await this.page.locator(removeButtons).first().click();
-      // await this.page.waitForTimeout(500); 
     }
   }
 

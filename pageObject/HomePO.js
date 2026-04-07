@@ -24,7 +24,6 @@ export class HomePO {
     await this.page.locator(productsMenu).click();
   }
 
-
   async searchProduct(productName) {
     await this.page.locator(searchInput).fill(productName);
     await this.page.locator(searchButton).click();

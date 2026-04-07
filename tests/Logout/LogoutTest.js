@@ -17,8 +17,6 @@ test.describe('Logout Tests', () => {
 
     Logger.step('Navigating to login page');
     await homePage.navigateToLoginSignUp();
-
-    Logger.step('Logging in with valid credentials');
     await loginPage.loginToApplication('test0808@yopmail.com', 'Test@123'); 
   });
 
@@ -26,10 +24,10 @@ test.describe('Logout Tests', () => {
     Logger.step('Verifying user is logged in');
     expect(await homePage.getLoggedInText()).toContain('Logged in as');
 
-    Logger.step('Clicking logout');
+    Logger.step('Click on the Logout link');
     await homePage.clickOnLogout();
 
-    Logger.step('Verifying user is logged out');
+    Logger.step('Verify that the user is logged out successfully');
     expect(await homePage.isLoggedOut()).toBe(true);
   });
 });

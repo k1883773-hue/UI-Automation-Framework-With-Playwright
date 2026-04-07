@@ -38,9 +38,20 @@ test.describe('Signup Tests', () => {
 
     Logger.step('Signing up with existing email');
     await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
-    
+
     Logger.step('Verifying error message for existing email');
     expect(await signUpPage.getErrorMessage()).toContain('Email Address already exist!');
   });
+
+   test('Verify error message for empty fields', async () => {
+
+    Logger.step('Click signup without entering credentials');
+    await signUpPage.clickOnSignupButton();
+
+    Logger.step('Verifying validation message for empty fields');
+    const emailValidation = await signUpPage.getEmailRequiredMessage();
+    expect(emailValidation).toMatch(/fill/i);
+  });
+
 
 });
