@@ -53,5 +53,4 @@ test.describe('Signup Tests', () => {
     expect(emailValidation).toMatch(/fill/i);
   });
 
-
 });

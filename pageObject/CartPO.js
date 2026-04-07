@@ -44,7 +44,7 @@ export class CartPO {
   async getCartDetails() {
     const names = await this.getCartProductNames();
     const prices = await this.page.locator(productPrices).allTextContents();
-    const quantities =  await this.page.locator(productQuantity).allTextContents();
+    const quantities = await this.page.locator(productQuantity).allTextContents();
     const totals = await this.page.locator(productTotalPrice).allTextContents();
 
     const cartData = names.map((name, index) => ({

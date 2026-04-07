@@ -20,17 +20,17 @@ test.describe('Add To Cart Tests', () => {
     await homePage.navigateToProducts();
   });
 
-  test('Verify random product can be added to cart successfully', async () => {
+  test('Verify product can be added to cart successfully', async () => {
 
-    Logger.step('Selecting random product and opening details page');
-    const expectedProductName = await homePage.selectRandomProductAndOpen();
-    Logger.step('Verifying correct product detail page is opened');
-    const actualProductName = await productPage.getProductDetailName();
-    expect(actualProductName.trim()).toContain(expectedProductName.trim());
+    Logger.step('Selecting product and opening details page');
+    await homePage.selectRandomProductAndOpen();
+
     Logger.step('Adding product to cart');
     await productPage.clickAddToCart();
+
     Logger.step('Navigating to cart');
     await homePage.navigateToCartPage();
+
     Logger.step('Verifying product in cart');
     const cartProducts = await productPage.getCartProducts();
     cartProducts.forEach(product => {

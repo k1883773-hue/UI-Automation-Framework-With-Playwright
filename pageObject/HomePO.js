@@ -4,6 +4,7 @@ const logoutLink = 'text= Logout';
 const productsMenu = 'a[href="/products"]';
 const searchInput = '#search_product';
 const searchButton = '#submit_search';
+const searchProductsTitle = '.title.text-center';
 const productList = '.features_items .product-image-wrapper';
 const productDetailLinks = 'a[href*="/product_details/"]';
 const productNames = '.features_items .productinfo p';
@@ -27,6 +28,10 @@ export class HomePO {
   async searchProduct(productName) {
     await this.page.locator(searchInput).fill(productName);
     await this.page.locator(searchButton).click();
+  }
+
+  async getSearchedProductsTitle() {
+    return await this.page.locator(searchProductsTitle).textContent();
   }
 
   async getProductCount() {

@@ -29,7 +29,8 @@ test.describe('Search Product Tests', () => {
         await productPage.searchProduct(searchData.getProductName());
 
         Logger.step('Verifying search results are displayed');
-        await expect(productPage.page.locator('.title.text-center')).toContainText('Searched Products');
+        await expect(homePage.getSearchedProductsTitle())
+    .toContainText('Searched Products');
         expect(await productPage.getProductCount()).toBeGreaterThan(0);
 
     });
