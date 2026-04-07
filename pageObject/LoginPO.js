@@ -27,10 +27,6 @@ export class LoginPO {
     return await this.page.locator(errorMessageLabel).textContent();
   }
 
-  async getEmailValidationMessage() {
-    return await this.page.locator('input[data-qa="login-email"]').evaluate(el => el.validationMessage);
-  }
-
   async getEmailRequiredMessage() {
     return await this.page.locator(emailTextBox).evaluate(el => el.validationMessage);
   }

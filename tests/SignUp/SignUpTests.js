@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { SignupData } from '../../dataFactory/SignUpData/SignUpData.js';
 import { SignupPO } from '../../pageObject/SignUpPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';  
+import { HomePO } from '../../pageObject/HomePO.js';  
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
@@ -13,7 +13,7 @@ test.describe('Signup Tests', () => {
   test.beforeEach(async ({ page }) => {
 
     signUpPage = new SignupPO(page);
-    homePage = new HomePagePO(page);
+    homePage = new HomePO(page);
 
     Logger.step('Navigating to application');
     await page.goto(config.url.local);
@@ -27,8 +27,8 @@ test.describe('Signup Tests', () => {
     const signUpData = SignupData.createValidSignupData();
 
     Logger.step('Enter valid signup details and submit');
-    await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
-    await signUpPage.completeSignup(signUpData);
+    await signUpPage.fillSignupDetails(signUpData);
+
     Logger.step('Verifying successful signup');
     expect(await signUpPage.getSuccessMessage()).toContain('Account Created!');
   });
@@ -37,7 +37,8 @@ test.describe('Signup Tests', () => {
     const signUpData = SignupData.createSignupWithExistingEmail();
 
     Logger.step('Signing up with existing email');
-    await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
+    // await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
+    await signUpPage.completeSignup(signUpData);
     Logger.step('Verifying error message for existing email');
     expect(await signUpPage.getErrorMessage()).toContain('Email Address already exist!');
   });

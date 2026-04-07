@@ -1,8 +1,8 @@
 const addToCartButton = 'button[type="button"]';
 const cartProductNames = '.cart_item .product-name';
 const cartProductPrices = '.cart_item .product-price';
-const productItems = '.features_items .product-image-wrapper';
 const productDetailName = '.product-information h2';
+const productDetailPrice = '.product-information span span';
 
 export class ProductPO {
 
@@ -10,12 +10,12 @@ export class ProductPO {
     this.page = page;
   }
 
-  async navigateToProducts() {
-    await this.page.locator('a[href="/products"]').click();
-  }
-
   async getProductDetailName() {
     return await this.page.locator(productDetailName).textContent();
+  }
+
+  async getProductDetailPrice() {
+    return await this.page.locator(productDetailPrice).textContent();
   }
 
   async clickAddToCart() {

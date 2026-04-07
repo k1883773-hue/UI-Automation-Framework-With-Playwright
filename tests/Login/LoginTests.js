@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginData } from '../../dataFactory/LoginData/LoginData.js';
 import { LoginPO } from '../../pageObject/loginPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
@@ -13,7 +13,7 @@ test.describe('Login Tests', () => {
   test.beforeEach(async ({ page }) => {
 
     loginPage = new LoginPO(page);
-    homePage = new HomePagePO(page);
+    homePage = new HomePO(page);
 
     Logger.step('Navigating to application');
     await page.goto(config.url.local);
@@ -50,7 +50,7 @@ test.describe('Login Tests', () => {
     Logger.step('Entering invalid email format');
     await loginPage.loginToApplication(loginData.email, loginData.password);
     Logger.step('Verifying error message for invalid email format');
-    expect(await loginPage.getEmailValidationMessage()).toMatch(/email/i);
+    expect(await loginPage.getEmailRequiredMessage()).toMatch(/email/i);
   });
 
   test('Verify error message for empty credentials', async () => {

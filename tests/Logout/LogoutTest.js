@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPO } from '../../pageObject/loginPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
@@ -10,7 +10,7 @@ test.describe('Logout Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPO(page);
-    homePage = new HomePagePO(page);
+    homePage = new HomePO(page);
 
     Logger.step('Navigating to application');
     await page.goto(config.url.local);

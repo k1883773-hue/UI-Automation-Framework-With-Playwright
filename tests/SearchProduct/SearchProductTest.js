@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { SearchProductData } from '../../dataFactory/ProductData/ProductData.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
@@ -7,16 +7,18 @@ import Logger from '../../utilities/logs.js';
 test.describe('Search Product Tests', () => {
 
     let productPage;
+    let homePage;
 
     test.beforeEach(async ({ page }) => {
 
-        productPage = new HomePagePO(page);
+        productPage = new HomePO(page);
+        homePage = new HomePO(page);
 
         Logger.step('Navigating to application');
         await page.goto(config.url.local);
 
         Logger.step('Navigating to Products page');
-        await productPage.navigateToProducts();
+        await homePage.navigateToProducts();
     });
 
     test('Verify search with valid product', async () => {

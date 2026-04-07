@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPO } from '../../pageObject/loginPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { ProductPO } from '../../pageObject/ProductPO.js';
 import { CartPO } from '../../pageObject/CartPO.js';
 import { CheckoutPO } from '../../pageObject/CheckoutPO.js';
@@ -20,7 +20,7 @@ test.describe('Add To Cart Tests', () => {
 
         loginPage = new LoginPO(page);
         productPage = new ProductPO(page);
-        homePage = new HomePagePO(page);
+        homePage = new HomePO(page);
         cartPage = new CartPO(page);
         checkoutPage = new CheckoutPO(page);
 

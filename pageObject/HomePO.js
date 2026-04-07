@@ -4,17 +4,13 @@ const logoutLink = 'text= Logout';
 const productsMenu = 'a[href="/products"]';
 const searchInput = '#search_product';
 const searchButton = '#submit_search';
-const searchedProductsTitle = '.title.text-center';
 const productList = '.features_items .product-image-wrapper';
-const noResultsMessage = 'text=No products found';
-const continueShoppingButton = 'button:has-text("Continue Shopping")';
 const productDetailLinks = 'a[href*="/product_details/"]';
 const productNames = '.features_items .productinfo p';
 const productPrice = '.features_items .productinfo h2';
-const cartLink = 'a[href="/view_cart"]';
 const deleteAccountLink = 'a[href="/delete_account"]';
 
-export class HomePagePO {
+export class HomePO {
 
   constructor(page) {
     this.page = page;
@@ -24,36 +20,18 @@ export class HomePagePO {
     await this.page.locator(loginLink).click();
   }
 
-   async navigateToSignup() {
-    await this.page.locator(signupLink).click();
-  }
   async navigateToProducts() {
     await this.page.locator(productsMenu).click();
   }
 
-  async enterSearchProduct(productName) {
-    await this.page.locator(searchInput).fill(productName);
-  }
-
-  async clickOnSearch() {
-    await this.page.locator(searchButton).click();
-  }
 
   async searchProduct(productName) {
-    await this.enterSearchProduct(productName);
-    await this.clickOnSearch();
-  }
-
-  async getSearchedProductTitle() {
-    return await this.page.locator(searchedProductsTitle).textContent();
+    await this.page.locator(searchInput).fill(productName);
+    await this.page.locator(searchButton).click();
   }
 
   async getProductCount() {
     return await this.page.locator(productList).count();
-  }
-
-  async isNoResultVisible() {
-    return await this.page.locator(noResultsMessage).isVisible();
   }
 
   async getLoggedInText() {
@@ -65,16 +43,7 @@ export class HomePagePO {
   }
 
   async isLoggedOut() {
-    const signupLoginVisible = await this.page.locator(loginLink).isVisible();
-    return signupLoginVisible;
-  }
-
-  async getLoggedInText() {
-    return await this.page.locator('text=Logged in as').textContent();
-  }
-
-  async clickOnContinueShopping() {
-    await this.page.locator(continueShoppingButton).click();
+    return await this.page.locator(loginLink).isVisible();
   }
 
   async clickOnProductByIndex(index) {

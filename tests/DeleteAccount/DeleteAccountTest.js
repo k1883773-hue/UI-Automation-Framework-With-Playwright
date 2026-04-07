@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPO } from '../../pageObject/loginPO.js';
 import { SignupPO } from '../../pageObject/SignUpPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { DeleteAccountPO } from '../../pageObject/DeleteAccountPO.js';
 import { SignupData } from '../../dataFactory/SignUpData/SignUpData.js';
 import { LoginData } from '../../dataFactory/LoginData/LoginData.js';
@@ -18,7 +18,7 @@ test.describe('Delete Account Tests', () => {
     test.beforeEach(async ({ page }) => {
 
         loginPage = new LoginPO(page);
-        homePage = new HomePagePO(page);
+        homePage = new HomePO(page);
         deleteAccountPage = new DeleteAccountPO(page);
         signUpPage = new SignupPO(page);
 
@@ -29,8 +29,8 @@ test.describe('Delete Account Tests', () => {
         const signUpData = SignupData.createValidSignupData();
         Logger.step('Enter valid signup details and submit');
       
-        await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
-        await signUpPage.completeSignup(signUpData);
+        // await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
+        await signUpPage.fillSignupDetails(signUpData);
         Logger.step('Verifying successful signup');
         expect(await signUpPage.getSuccessMessage()).toContain('Account Created!');
 

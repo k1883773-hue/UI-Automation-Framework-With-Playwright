@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { ProductPO } from '../../pageObject/ProductPO.js';
-import { HomePagePO } from '../../pageObject/HomePagePO.js';
+import { HomePO } from '../../pageObject/HomePO.js';
 import { config } from '../../utilities/config.js';
 import Logger from '../../utilities/logs.js';
 
@@ -12,12 +12,12 @@ test.describe('Add To Cart Tests', () => {
   test.beforeEach(async ({ page }) => {
 
     productPage = new ProductPO(page);
-    homePage = new HomePagePO(page);
+    homePage = new HomePO(page);
 
     Logger.step('Navigating to application');
     await page.goto(config.url.local);
     Logger.step('Navigating to Products page');
-    await productPage.navigateToProducts();
+    await homePage.navigateToProducts();
   });
 
   test('Verify random product can be added to cart successfully', async () => {
