@@ -37,8 +37,8 @@ test.describe('Signup Tests', () => {
     const signUpData = SignupData.createSignupWithExistingEmail();
 
     Logger.step('Signing up with existing email');
-    // await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
-    await signUpPage.completeSignup(signUpData);
+    await signUpPage.signupWithNameAndEmail(signUpData.name, signUpData.email);
+    
     Logger.step('Verifying error message for existing email');
     expect(await signUpPage.getErrorMessage()).toContain('Email Address already exist!');
   });
